@@ -2,7 +2,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Notifications from './Notifications';
-import { getLatestNotification } from './utils';
+import { getLatestNotification } from './utils/utils';
 
 // Mock the getLatestNotification function
 jest.mock('./utils', () => ({
