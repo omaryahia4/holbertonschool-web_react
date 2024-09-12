@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './App.jsx';
+import App from "/home/omar/HBTN_curr_test/holbertonschool-web_react/react_intro/task_0/dashboard/AppTest.jsx";
 
 test('should contain a <p/> element with specific text, <h1/>, and an <img/>', () => {
   render(<App />);
