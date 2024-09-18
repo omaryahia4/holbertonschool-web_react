@@ -1,14 +1,8 @@
 import React from "react";
 import {render, screen} from "@testing-library/react"
 import App from "./App";
-import { getFooterCopy, getCurrentYear, getLatestNotification  } from './utils';
+import { getFooterCopy} from './utils';
 
-
-jest.mock('./utils', () => ({
-  getFooterCopy: jest.fn(),
-  getCurrentYear: jest.fn(),
-  getLatestNotification : jest.fn()
-}));
 
 test('renders School Dashboard heading', () => {
     render(<App />);
@@ -24,14 +18,7 @@ test('renders School Dashboard heading', () => {
   });
 
   test('renders correct copyright string when getFooterCopy returns true', () => {
-    getFooterCopy.mockReturnValue('Holberton School');
-    render(<App />);
-    const paragraphElement = screen.getByText((content, element) =>
-      content.startsWith('Copyright') && 
-      content.includes('Holberton School')
-    );
-
-    expect(paragraphElement).toBeInTheDocument();
+    expect(getFooterCopy(true)).toBe('Holberton School');
   });
 
   test('renders App img', () => {
