@@ -1,18 +1,9 @@
-
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Notifications from './Notifications';
-import { getLatestNotification } from './utils';
 
-// Mock the getLatestNotification function
-jest.mock('./utils', () => ({
-  getLatestNotification: jest.fn(),
-}));
 
 describe('Notifications component', () => {
-  beforeEach(() => {
-    getLatestNotification.mockReturnValue('<strong>Urgent requirement</strong> - complete by EOD');
-  });
 
   test('renders the notifications title', () => {
     render(<Notifications />);
