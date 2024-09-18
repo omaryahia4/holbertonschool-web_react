@@ -1,18 +1,9 @@
-
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Notifications from './Notifications';
-import { getLatestNotification } from './utils/utils';
+import Notifications from '../Notifications/Notifications';
 
-// Mock the getLatestNotification function
-jest.mock('./utils', () => ({
-  getLatestNotification: jest.fn(),
-}));
 
 describe('Notifications component', () => {
-  beforeEach(() => {
-    getLatestNotification.mockReturnValue('<strong>Urgent requirement</strong> - complete by EOD');
-  });
 
   test('renders the notifications title', () => {
     render(<Notifications />);
@@ -33,11 +24,11 @@ describe('Notifications component', () => {
   });
 
   test('logs message when close button is clicked', () => {
-    console.log = jest.fn();
     render(<Notifications />);
+    const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
     const buttonElement = screen.getByRole('button', { name: /close/i });
     fireEvent.click(buttonElement);
-    expect(console.log).toHaveBeenCalledWith('Close button has been clicked');
+    expect(consoleLogSpy).toHaveBeenCalledWith('Close button has been clicked');
   });
 
 });

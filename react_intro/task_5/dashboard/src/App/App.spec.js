@@ -1,11 +1,7 @@
-/**
- * @jest-environment jsdom
- */
-
 import React from "react";
 import {render, screen} from "@testing-library/react"
 import App from "./App";
-
+import { getFooterCopy} from '../utils/utils';
 
 test('renders School Dashboard heading', () => {
     render(<App />);
@@ -20,11 +16,9 @@ test('renders School Dashboard heading', () => {
     expect(bodyElement.closest('.App-body')).toBeInTheDocument();
   });
 
-  // test('renders App footer text', () => {
-  //   render(<App />);
-  //   const bodyElement = screen.getByText(/Copyright 2024 - holberton School/i);
-  //   expect(bodyElement.closest('.App-footer')).toBeInTheDocument();
-  // });
+  test('renders correct copyright string when getFooterCopy returns true', () => {
+    expect(getFooterCopy(true)).toBe('Holberton School');
+  });
 
   test('renders App img', () => {
     render(<App />);
