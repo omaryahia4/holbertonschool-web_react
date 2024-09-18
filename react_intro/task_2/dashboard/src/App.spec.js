@@ -1,12 +1,12 @@
 import React from "react";
 import {render, screen} from "@testing-library/react"
 import App from "./App";
-import { getFooterCopy, getFullYear, getLatestNotification  } from './utils';
+import { getFooterCopy, getCurrentYear, getLatestNotification  } from './utils';
 
 
 jest.mock('./utils', () => ({
   getFooterCopy: jest.fn(),
-  getFullYear: jest.fn(),
+  getCurrentYear: jest.fn(),
   getLatestNotification : jest.fn()
 }));
 
