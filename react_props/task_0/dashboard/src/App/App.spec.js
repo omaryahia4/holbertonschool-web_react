@@ -13,7 +13,6 @@ import Notifications from "../Notifications/Notifications";
 
   test('renders App component without craching', () => {
     render(<App />);
-    
   });
 
   test('renders Header component without craching', () => {
