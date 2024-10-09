@@ -6,11 +6,11 @@ export default function Login() {
     <div className='App-body'>
         <p>Login to access the full dashboard</p>
         <label htmlFor='email' className='email'>
-          Email:
+          Email
         </label>
         <input id='email' type='email'/>
         <label className='password'>
-          Password:
+          Password
         </label>
         <input type='password'/>
         <button className='label-button'>OK</button>

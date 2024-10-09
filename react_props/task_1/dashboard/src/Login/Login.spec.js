@@ -41,8 +41,8 @@ import Login from "./Login";
 
   test('focuses the email input when the email label is clicked', async() => {
     render(<Login />);
-    const emailLabel = screen.getByLabelText(/email:/i);
-    const emailInput = screen.getByRole('textbox', { name: /email:/i });
+    const emailLabel = screen.getByLabelText(/email/i);
+    const emailInput = screen.getByRole('textbox', { name: /email/i });
     await userEvent.click(emailLabel);
 
     expect(emailInput).toHaveFocus();
