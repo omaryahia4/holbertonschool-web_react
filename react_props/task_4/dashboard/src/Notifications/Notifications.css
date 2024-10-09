@@ -1,0 +1,21 @@
+.menuItem {
+  text-align: right;
+}
+.Notifications {
+    border: dotted;
+    border-color: crimson;
+    margin-top: 1%;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+    width: 40%;
+    margin-left: 59%;
+
+}
+
+[data-notification-type="default"] {
+    color: blue;
+  }
+
+[data-notification-type="urgent"] {
+color: red;
+}
