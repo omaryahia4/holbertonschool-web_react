@@ -5,9 +5,9 @@
 import React from "react";
 import {render, screen} from "@testing-library/react"
 import Footer from "./Footer";
-import { getFooterCopy } from '../Utils/utils';
+import { getFooterCopy } from '../utils/utils';
 
-  jest.mock('../Utils/utils', () => ({
+  jest.mock('../utils/utils', () => ({
     getFooterCopy: jest.fn(),
     getFullYear: jest.fn()
   }));
