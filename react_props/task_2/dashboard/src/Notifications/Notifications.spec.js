@@ -2,17 +2,9 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Notifications from './Notifications';
-import { getLatestNotification } from '../Utils/utils';
-
-// Mock the getLatestNotification function
-jest.mock('../Utils/utils', () => ({
-  getLatestNotification: jest.fn(),
-}));
+import { getLatestNotification } from '../utils/utils';
 
 describe('Notifications component', () => {
-  beforeEach(() => {
-    getLatestNotification.mockReturnValue('<strong>Urgent requirement</strong> - complete by EOD');
-  });
 
   test('renders the notifications title', () => {
     render(<Notifications />);
@@ -39,7 +31,6 @@ describe('Notifications component', () => {
     fireEvent.click(buttonElement);
     expect(console.log).toHaveBeenCalledWith('Close button has been clicked');
   });
-
 
   test('should display the 3 notification items with their given text', () => {
     render(<Notifications />);
