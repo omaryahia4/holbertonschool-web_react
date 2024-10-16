@@ -21,8 +21,8 @@ const Notifications = () => {
       </button>
       <p>Here is the list of notifications</p>
       <ul>
-        <NotificationItem type="default" value="New course available" style={{color: 'blue'}} />
-        <NotificationItem type="urgent" value="New resume available" style={{color: 'red'}} />
+        <NotificationItem type="default" value="New course available" />
+        <NotificationItem type="urgent" value="New resume available"/>
         <NotificationItem
           type="urgent"
           html={{ __html: getLatestNotification() }}
