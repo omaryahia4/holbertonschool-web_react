@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 import React from "react";
 import {render, screen} from "@testing-library/react"
 import App from './App'
@@ -11,30 +7,30 @@ import Footer from "../Footer/Footer";
 import Notifications from "../Notifications/Notifications";
 
 
-  // test('renders App component without craching', () => {
-  //   render(<App />);
-    
-  // });
+  test('renders App component without craching', () => {
+    render(<App />);
+  
+  });
 
-  // test('renders Header component without craching', () => {
-  //   render(<Header />);
-    
-  // });
+  test('renders Header component without craching', () => {
+    render(<Header />);
 
-  // test('renders Login component without craching', () => {
-  //   render(<Login />);
-    
-  // });
+  });
 
-  // test('renders Footer component without craching', () => {
-  //   render(<Footer />);
+  test('renders Login component without craching', () => {
+    render(<Login />);
     
-  // });
+  });
 
-  // test('renders Notifications component without craching', () => {
-  //   render(<Notifications />);
+  test('renders Footer component without craching', () => {
+    render(<Footer />);
     
-  // });
+  });
+
+  test('renders Notifications component without craching', () => {
+    render(<Notifications />);
+    
+  });
 
   test('renders 2 input elements and a button with the text "OK" when isLoggedIn is false', () => {
     render(<App isLoggedIn={false} />);
