@@ -1,6 +1,6 @@
 import React from 'react'
 import './Footer.css'
-import { getFullYear, getFooterCopy } from '../Utils/utils';
+import { getFullYear, getFooterCopy } from '../utils/utils';
 
 export default function Footer() {
   return (

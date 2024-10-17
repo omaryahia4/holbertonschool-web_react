@@ -12,7 +12,7 @@ const coursesList = [
   { id:3, name:'React', credit:40 }
 ];
 
-function App({ isLoggedIn = "false" }) {
+function App({ isLoggedIn = true }) {
   return (
     <>
       <Notification displayDrawer = {false}/>
