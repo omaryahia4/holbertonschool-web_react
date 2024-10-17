@@ -4,7 +4,7 @@ import { getLatestNotification } from '../utils/utils';
 import NotificationItem from './NotificationItem';
 import PropTypes from 'prop-types';
 
-const Notifications = ({ displayDrawer = false }) => {
+const Notifications = ({ displayDrawer = true }) => {
   return (
     <>
     <div className="menuItem">Your notifications</div>
@@ -22,7 +22,6 @@ const Notifications = ({ displayDrawer = false }) => {
             aria-label="Close"
             onClick={() => console.log('Close button has been clicked')}
           >
-            &times;
           </button>
           <p>Here is the list of notifications</p>
           <ul>

@@ -12,10 +12,10 @@ const coursesList = [
   { id:3, name:'React', credit:40 }
 ];
 
-function App({ isLoggedIn = true }) {
+function App({ isLoggedIn = false }) {
   return (
     <>
-      <Notification displayDrawer = {false}/>
+      <Notification displayDrawer = {true}/>
       <div className="App">
         <Header />
         {isLoggedIn ? <CourseList courses={coursesList} /> : <Login />}
