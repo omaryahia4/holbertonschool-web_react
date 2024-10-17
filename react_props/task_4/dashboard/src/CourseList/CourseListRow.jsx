@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CourseListRow = ({ isHeader = false, textFirstCell, textSecondCell = null }) => {
+const CourseListRow = ({ isHeader = false, textFirstCell = '', textSecondCell = null }) => {
     return (
       <tr>
         {isHeader ? (

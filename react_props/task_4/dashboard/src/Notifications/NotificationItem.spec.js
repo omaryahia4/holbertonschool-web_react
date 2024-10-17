@@ -1,22 +1,15 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Notification from './Notifications'
 import NotificationItem from './NotificationItem';
-import '@testing-library/jest-dom'
 
-// describe('NotificationItem component', () => {
-//   // test('renders with the correct data-priority attribute for default type', () => {
-//   //   render(<Notification />);
-//   //   const liElement = screen.getByText('New course available');
-//   //   expect(liElement).toHaveAttribute('data-notification-type', 'default');
-//   //   expect(liElement).toHaveStyle('color:blue');
-//   // });
 
-//   // test('renders with the correct data-priority attribute for urgent type', () => {
-//   //   const { getByText } = render(<NotificationItem type="urgent" value="Urgent notification" />);
-//   //   const liElement = getByText('Urgent notification');
+test('Check whether the li element notification has the color blue when the type is set to be "defaut"', () => {
+  render(<NotificationItem type="default" />);
+  const liElement = screen.getByRole('listitem');
+  expect(liElement).toHaveStyle({ color: 'blue' });
+});
 
-//   //   expect(liElement).toHaveAttribute('data-priority', 'urgent');
-//   //   expect(liElement).toHaveStyle('color: red');
-//   // });
-// });
+test('Check whether the li element notification has the color red when the type is set to be "urgent"', () => {
+  render(<NotificationItem type="urgent" />);
+  const liElement = screen.getByRole('listitem');
+  expect(liElement).toHaveStyle({ color: 'red' });
+});
