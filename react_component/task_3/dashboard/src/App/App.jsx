@@ -50,7 +50,7 @@ class App extends React.Component {
         <div className="App">
           <Header />
           {isLoggedIn ? 
-          <BodySectionWithMarginBottom title="Course list">
+          <BodySectionWithMarginBottom title="Course List">
             <CourseList courses={coursesList} />
           </BodySectionWithMarginBottom>
           :
