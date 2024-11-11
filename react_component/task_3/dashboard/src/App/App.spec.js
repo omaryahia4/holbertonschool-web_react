@@ -68,3 +68,23 @@ import Notifications from "../Notifications/Notifications";
     fireEvent.keyDown(document, { key: 'h', ctrlKey: true });
     expect(global.alert).toHaveBeenCalledWith('Logging you out');
   });
+
+  test('displays the title "Course list" above the CourseList component when isLoggedIn is true', () => {
+    render(<App isLoggedIn={true} />);
+    const courseListTitle = screen.getByText(/Course list/i);
+    expect(courseListTitle).toBeInTheDocument();
+  });
+
+  test('displays the title "Log in to continue" above the Login component when isLoggedIn is false', () => {
+    render(<App isLoggedIn={false} />);
+    const loginTitle = screen.getByText('Log in to continue');
+    expect(loginTitle).toBeInTheDocument();
+  });
+
+  test('displays "News from the School" and "Holberton School News goes here" by default', () => {
+    render(<App />);
+    const newsTitle = screen.getByText('News from the School');
+    expect(newsTitle).toBeInTheDocument();
+    const newsContent = screen.getByText('Holberton School News goes here');
+    expect(newsContent).toBeInTheDocument();
+  });
