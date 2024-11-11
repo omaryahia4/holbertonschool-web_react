@@ -1,11 +1,14 @@
 import React from 'react';
-import './App.css';
 import Notification from '../Notifications/Notifications';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
 import CourseList from '../CourseList/CourseList';
 import { getLatestNotification } from '../utils/utils';
+import BodySection from '../BodySection/BodySection';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom'
+import './App.css';
+
 
 const notificationsList = [
   { id: 1, type: 'default', value: 'New course available' },
@@ -46,7 +49,18 @@ class App extends React.Component {
         <Notification notifications={notificationsList} />
         <div className="App">
           <Header />
-          {isLoggedIn ? <CourseList courses={coursesList} /> : <Login />}
+          {isLoggedIn ? 
+          <BodySectionWithMarginBottom title="Course list">
+            <CourseList courses={coursesList} />
+          </BodySectionWithMarginBottom>
+          :
+          <BodySectionWithMarginBottom title='Log in to continue'>
+            <Login />
+          </BodySectionWithMarginBottom>
+          }
+          <BodySection title="News from the School">
+            <p>Holberton School News goes here</p>
+          </BodySection>
           <Footer />
         </div>
       </>
