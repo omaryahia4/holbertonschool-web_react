@@ -6,4 +6,3 @@ export default function BodySection(props) {
       {props.children}
   </div>;
 }
-

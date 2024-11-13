@@ -28,7 +28,6 @@ import Notifications from "../Notifications/Notifications";
 
   test('renders Notifications component without craching', () => {
     render(<Notifications />);
-    
   });
 
   test('renders 2 input elements and a button with the text "OK" when isLoggedIn is false', () => {
@@ -71,7 +70,7 @@ import Notifications from "../Notifications/Notifications";
 
   test('displays the title "Course list" above the CourseList component when isLoggedIn is true', () => {
     render(<App isLoggedIn={true} />);
-    const courseListTitle = screen.getByText(/Course list/i);
+    const courseListTitle = screen.getByText("Course list");
     expect(courseListTitle).toBeInTheDocument();
   });
 
