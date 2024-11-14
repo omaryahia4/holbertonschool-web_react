@@ -1,12 +1,12 @@
 import React from "react";
-import {render, screen, fireEvent} from "@testing-library/react"
-import App from './App'
+import {render, screen, fireEvent} from "@testing-library/react";
+import App from './App';
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
 import Notifications from "../Notifications/Notifications";
 
-
+describe('App Component', () => {
   test('renders App component without craching', () => {
     render(<App />);
   });
@@ -87,3 +87,4 @@ import Notifications from "../Notifications/Notifications";
     const newsContent = screen.getByText('Holberton School News goes here');
     expect(newsContent).toBeInTheDocument();
   });
+})
