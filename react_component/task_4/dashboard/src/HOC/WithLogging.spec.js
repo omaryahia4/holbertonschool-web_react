@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
-import withLogging from './WithLogging';
+import WithLogging from './WithLogging';
 
 
 class MockApp extends React.Component {
@@ -9,7 +9,7 @@ class MockApp extends React.Component {
   }
 }
 
-const MockAppWithLogging = withLogging(MockApp);
+const MockAppWithLogging = WithLogging(MockApp);
 
 describe('WithLogging HOC', () => {
 

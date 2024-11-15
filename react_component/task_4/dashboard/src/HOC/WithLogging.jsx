@@ -1,6 +1,6 @@
 import React from 'react';
 
-const withLogging = (WrappedComponent) => {
+const WithLogging = (WrappedComponent) => {
   const name =
     WrappedComponent.displayName || WrappedComponent.name || 'Component'; 
 
@@ -26,9 +26,9 @@ const withLogging = (WrappedComponent) => {
       return <WrappedComponent {...this.props} />;
     }
   }
-  WithLoggingComponent.displayName = `WithLogging(${WrappedComponent})`;
+  WithLoggingComponent.displayName = `WithLogging(${name})`;
   return WithLoggingComponent;
 };
 
 
-export default withLogging;
+export default WithLogging;
