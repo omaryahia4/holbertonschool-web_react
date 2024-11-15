@@ -5,7 +5,6 @@ import Header from "../Header/Header";
 import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
 import Notifications from "../Notifications/Notifications";
-// import App from "../../test-App_component-seq1"
 
   test('renders App component without craching', () => {
     render(<App />);
@@ -34,7 +33,7 @@ import Notifications from "../Notifications/Notifications";
   test('renders 2 input elements and a button with the text "OK" when isLoggedIn is false', () => {
     render(<App isLoggedIn={false} />);
 
-    const emailInput = screen.getAllByRole('textbox');
+    const emailInput = screen.getAllByRole('textbox', { name: /email/i });
     expect(emailInput.length).toBe(1);
 
     const passwordInput = screen.getByText(/password/i);
