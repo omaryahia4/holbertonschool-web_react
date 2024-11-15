@@ -123,4 +123,34 @@ describe('Notifications component', () => {
     expect(screen.getByRole('listitem')).toBeInTheDocument()
   });
 
+  test('Notifications does not re-render if the notifications prop length stays the same', () => {
+    const initialNotifications = [
+      { id: 1, type: 'default', value: 'New course available' },
+      { id: 2, type: 'urgent', value: 'New resume available' }
+    ];
+  
+    const { rerender } = render(<Notifications notifications={initialNotifications} />);
+  
+    rerender(<Notifications notifications={initialNotifications} />);
+
+    expect(screen.getByText('Here is the list of notifications')).toBeInTheDocument();
+  });
+
+  test('Notifications re-renders when the notifications prop length changes', () => {
+    const initialNotifications = [
+      { id: 1, type: 'default', value: 'New course available' }
+    ];
+  
+    const newNotifications = [
+      { id: 1, type: 'default', value: 'New course available' },
+      { id: 2, type: 'urgent', value: 'New resume available' }
+    ];
+  
+    const { rerender } = render(<Notifications notifications={initialNotifications} />);
+
+    rerender(<Notifications notifications={newNotifications} />);
+
+    expect(screen.getByText('New resume available')).toBeInTheDocument();
+  });
+
 });

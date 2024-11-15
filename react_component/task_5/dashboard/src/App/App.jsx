@@ -1,7 +1,7 @@
 import React from 'react';
 import Notification from '../Notifications/Notifications';
 import Header from '../Header/Header';
-import Login from "/home/omar/HBTN_curr_test/holbertonschool-web_react/react_component/task_4/dashboard/test-withLoggingHOC-seq1.jsx";;;;;;;;;;;;
+import Login from "../Login/Login"
 import Footer from '../Footer/Footer';
 import CourseList from '../CourseList/CourseList';
 import { getLatestNotification } from '../utils/utils';
