@@ -1,6 +1,6 @@
 import React from "react";
 import {render, screen, fireEvent} from "@testing-library/react";
-import App from './App';
+import App from './App'
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
