@@ -1,7 +1,7 @@
 import React from 'react';
 import Notification from '../Notifications/Notifications';
 import Header from '../Header/Header';
-import Login from "../Login/Login";
+import Login from "../Login/Login"
 import Footer from '../Footer/Footer';
 import CourseList from '../CourseList/CourseList';
 import { getLatestNotification } from '../utils/utils';
@@ -23,16 +23,13 @@ const coursesList = [
 ];
 
 class App extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      displayDrawer: false,
-      user: {
-        email: '',
-        password: '',
-        isLoggedIn: false,
-      },
-      logOut: this.logOut,
+      displayDrawer: true,
+      user: { ...newContext.user },
+      logout: newContext.logOut,
     };
   }
 
@@ -45,9 +42,9 @@ class App extends React.Component {
   }
 
   handleKeydown = (e) => {
-    if (e.ctrlKey && e.key === "h" ) {
+    if (e.ctrlKey && e.key === "h") {
       alert("Logging you out");
-      this.state.logOut();
+      this.props.logOut();
     }
   };
 
@@ -80,35 +77,33 @@ class App extends React.Component {
   };
 
   render() {
-    const { displayDrawer, user, logOut } = this.state;
+    const { displayDrawer, user , logout } = this.state;
 
     return (
-      <newContext.Provider value={{ user, logOut }}>
-        <>
-          <Notification
-            notifications={notificationsList}
-            displayDrawer={displayDrawer}
-            handleDisplayDrawer={this.handleDisplayDrawer}
-            handleHideDrawer={this.handleHideDrawer}
-          />
-          <div className="App">
-            <Header />
-            {user.isLoggedIn ? (
-              <BodySectionWithMarginBottom title="Course list">
-                <CourseList courses={coursesList} />
-              </BodySectionWithMarginBottom>
-            ) : (
-              <BodySectionWithMarginBottom title="Log in to continue">
-                <Login logIn={this.logIn} />
-              </BodySectionWithMarginBottom>
-            )}
-            <BodySection>
-              News from the School
-              <p>Holberton School News goes here</p>
-            </BodySection>
-            <Footer />
-          </div>
-        </>
+      <newContext.Provider value={{ user, logout }}>
+        <Notification
+          notifications={notificationsList}
+          displayDrawer={displayDrawer}
+          handleDisplayDrawer={this.handleDisplayDrawer}
+          handleHideDrawer={this.handleHideDrawer}
+        />
+        <div className="App">
+          <Header />
+          {user.isLoggedIn ? (
+            <BodySectionWithMarginBottom title="Course list">
+              <CourseList courses={coursesList} />
+            </BodySectionWithMarginBottom>
+          ) : (
+            <BodySectionWithMarginBottom title="Log in to continue">
+              <Login logIn={this.logIn} />
+            </BodySectionWithMarginBottom>
+          )}
+          <BodySection>
+            News from the School
+            <p>Holberton School News goes here</p>
+          </BodySection>
+          <Footer />
+        </div>
       </newContext.Provider>
     );
   }
