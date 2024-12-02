@@ -43,7 +43,7 @@ class Login extends Component {
         <p>Login to access the full dashboard</p>
         <form onSubmit={this.handleLoginSubmit}>
           <label htmlFor="email" className="email">
-            Email:
+            Email
             <input
               id="email"
               type="email"
@@ -52,7 +52,7 @@ class Login extends Component {
             />
           </label>
           <label htmlFor="password" className="password">
-            Password:
+            Password
             <input
               id="password"
               type="password"
