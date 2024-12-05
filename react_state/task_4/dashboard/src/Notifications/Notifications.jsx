@@ -1,19 +1,13 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import closeIcon from '../assets/close-icon.png';
 import NotificationItem from './NotificationItem';
 import './Notifications.css';
 
-class Notifications extends Component {
+class Notifications extends PureComponent {
   constructor(props) {
     super(props);
   }
 
-  shouldComponentUpdate(nextProps) {
-    return (
-      this.props.notifications.length !== nextProps.notifications.length ||
-      this.props.displayDrawer !== nextProps.displayDrawer
-    );
-  }
 
   render() {
     const { notifications = [], displayDrawer = false, handleDisplayDrawer, 
@@ -43,7 +37,7 @@ class Notifications extends Component {
                         type={notification.type}
                         value={notification.value}
                         html={notification.html}
-                        markAsRead={() => markNotificationAsRead(notification.id)} // Call parent method
+                        markAsRead={() => markNotificationAsRead(notification.id)}
                       />
                     ))}
                   </ul>

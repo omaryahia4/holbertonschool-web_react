@@ -1,37 +1,47 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import App from './src/App/App';
+import { render, screen, fireEvent } from '@testing-library/react';
+import Notifications from './src/Notifications/Notifications';
 
 
-test('verify notification item deletion', async () => {
-  const appRef = React.createRef();
-  render(<App ref={appRef} />);
+test('should return true if the Notifications component is a class pure component', () => {
+	const props = Object.getOwnPropertyNames(Notifications.prototype);
+	const isClassPureComponent = Notifications.prototype.__proto__ === React.PureComponent.prototype;
+	const inheritsFromReactComponent = Object.getPrototypeOf(Notifications.prototype) === React.PureComponent.prototype;
+	
+	expect(props).toContain('constructor');
+	expect(isClassPureComponent).toBe(true);
+	expect(inheritsFromReactComponent).toBe(true);
+});
+
+test('it should rerender when prop values change', () => {
+  const markAsReadMock = jest.fn();
+
+  const initialProps = {
+    displayDrawer: true,
+    notifications: [
+      { id: 1, type: 'default', value: 'New notification' },
+      { id: 2, type: 'urgent', value: 'Urgent notification' }
+    ],
+    markNotificationAsRead: markAsReadMock,
+  };
+
+  const { rerender } = render(<Notifications {...initialProps} />);
 
   const listItems = screen.getAllByRole('listitem');
-  expect(listItems).toHaveLength(3);
+  expect(listItems).toHaveLength(2);
 
-  expect(listItems[0].textContent).toEqual('New course available');
-  expect(listItems[0]).toBeInTheDocument();
+  fireEvent.click(screen.getByText('New notification'));
 
-  expect(listItems[1].textContent).toEqual('New resume available');
-  expect(listItems[1]).toBeInTheDocument();
+  expect(markAsReadMock).toHaveBeenCalledWith(1);
 
-  expect(listItems[2].textContent).toEqual('Urgent requirement - complete by EOD');
-  expect(listItems[2]).toBeInTheDocument();
+  const updatedProps = {
+    ...initialProps,
+    notifications: [
+      { id: 2, type: 'urgent', value: 'Urgent notification' }
+    ]
+  };
 
-  if (appRef.current) {
-    await userEvent.click(screen.getByText('New course available'))
-  }
+  rerender(<Notifications {...updatedProps} />);
 
-  await waitFor(() => {
-    expect(appRef.current.state).toEqual(
-      expect.objectContaining({
-        "notifications": [
-          {"id": 2, "type": "urgent", "value": "New resume available"}, 
-          {"html": {"__html": "<strong>Urgent requirement</strong> - complete by EOD"}, "id": 3, "type": "urgent"}
-        ]
-      }
-    ))
-  })
+  expect(screen.getAllByRole('listitem')).toHaveLength(1);
 });
