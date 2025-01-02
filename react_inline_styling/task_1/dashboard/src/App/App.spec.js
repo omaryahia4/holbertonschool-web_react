@@ -88,4 +88,4 @@ import Notifications from "../Notifications/Notifications";
     expect(newsContent).toBeInTheDocument();
   });
 
-  jest.useFakeTimers();
+jest.useFakeTimers();
