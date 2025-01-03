@@ -89,3 +89,4 @@ import Notifications from "../Notifications/Notifications";
   });
 
 jest.useFakeTimers();
+

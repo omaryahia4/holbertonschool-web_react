@@ -59,7 +59,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { isLoggedIn = false } = this.props;
+    const { isLoggedIn = true } = this.props;
 
     return (
       <>
@@ -67,7 +67,7 @@ class App extends React.Component {
         <div className={css(styles.header)}>
           <Header />
         </div>
-          {isLoggedIn ? 
+          {isLoggedIn ?
           <BodySectionWithMarginBottom title="Course list">
             <CourseList courses={coursesList} />
           </BodySectionWithMarginBottom>

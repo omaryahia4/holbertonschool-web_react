@@ -6,24 +6,18 @@ const CourseListRow = ({ isHeader = false, textFirstCell = '', textSecondCell = 
   };
 
   return (
-    <tr style={rowStyle}>
-      {isHeader ? (
-        textSecondCell === null ? (
-          <th colSpan="2">{textFirstCell}</th>
-        ) : (
-          <>
-            <th>{textFirstCell}</th>
-            <th>{textSecondCell}</th>
-          </>
-        )
-      ) : (
-        <>
-          <td>{textFirstCell}</td>
-          <td>{textSecondCell}</td>
-        </>
-      )}
-    </tr>
-  );
+    isHeader ? (
+      <tr style={rowStyle}>
+        <th colSpan={textSecondCell ? 1 : 2}>{textFirstCell}</th>
+        {textSecondCell ? <th>{textSecondCell}</th> : null}
+      </tr>
+    ) : (
+      <tr style={rowStyle}>
+        <td>{textFirstCell}</td>
+        <td>{textSecondCell}</td>
+      </tr>
+    )
+  )
 };
 
 export default CourseListRow;
