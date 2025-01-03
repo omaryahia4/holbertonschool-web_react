@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import NotificationItem from './NotificationItem';
-
+const {StyleSheetTestUtils} = require("aphrodite");
 
 test('Check whether the li element notification has the color blue when the type is set to be "defaut"', () => {
   render(<NotificationItem type="default" />);
@@ -25,3 +25,4 @@ test('it should log to the console the "Notification id has been marked as read"
 
   expect(mockMarkAsRead).toHaveBeenCalled()
 });
+StyleSheetTestUtils.suppressStyleInjection();

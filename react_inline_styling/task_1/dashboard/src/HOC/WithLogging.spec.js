@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 import WithLogging from './WithLogging';
-
+const {StyleSheetTestUtils} = require("aphrodite");
 
 class MockApp extends React.Component {
   render() {
@@ -39,3 +39,4 @@ describe('WithLogging HOC', () => {
     consoleLogSpy.mockRestore();
   });
 });
+StyleSheetTestUtils.suppressStyleInjection();

@@ -2,7 +2,7 @@ import React from "react";
 import {render, screen} from "@testing-library/react"
 import userEvent from '@testing-library/user-event'
 import Login from "./Login";
-
+const {StyleSheetTestUtils} = require("aphrodite");
 
 
   test('renders App body text', () => {
@@ -43,3 +43,4 @@ import Login from "./Login";
 
     expect(emailInput).toHaveFocus();
   });
+  StyleSheetTestUtils.suppressStyleInjection();

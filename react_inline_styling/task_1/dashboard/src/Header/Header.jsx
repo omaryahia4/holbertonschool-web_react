@@ -2,6 +2,7 @@ import React from 'react';
 import HolbertonLogo from '../assets/holbertonlogo.jpg';
 import { StyleSheet, css } from 'aphrodite';
 
+
 const styles = StyleSheet.create({
   appHeader: {
     display: 'inline-flex',

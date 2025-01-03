@@ -1,7 +1,7 @@
 import React from "react";
 import {render, screen} from "@testing-library/react"
 import Header from "./Header";
-
+const {StyleSheetTestUtils} = require("aphrodite");
 
 test('renders School Dashboard heading', () => {
     render(<Header />);
@@ -17,4 +17,4 @@ test('renders School Dashboard heading', () => {
     expect(imgElement).toBeInTheDocument();
   });
 
-  jest.useFakeTimers();
+  StyleSheetTestUtils.suppressStyleInjection();

@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Notifications from './Notifications';
 import { getLatestNotification } from '../utils/utils'
-
+const {StyleSheetTestUtils} = require("aphrodite");
 
 describe('Notifications component', () => {
 
@@ -155,4 +155,4 @@ describe('Notifications component', () => {
 
 });
 
-jest.useFakeTimers();
+StyleSheetTestUtils.suppressStyleInjection();

@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import CourseList from './CourseList';
 import App from '../App/App';
+const {StyleSheetTestUtils} = require("aphrodite");
 
 describe('CourseList Component', () => {
   test('renders 5 different rows', () => {
@@ -11,4 +12,4 @@ describe('CourseList Component', () => {
     expect(rows.length).toBe(5); 
   });
 });
-jest.useFakeTimers();
+StyleSheetTestUtils.suppressStyleInjection();

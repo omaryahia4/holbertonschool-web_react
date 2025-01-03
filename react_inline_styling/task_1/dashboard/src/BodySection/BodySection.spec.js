@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import BodySection from './BodySection';
+const {StyleSheetTestUtils} = require("aphrodite");
 
 test('It should pass any number of children without knows then beforehand', () => {
   render(
@@ -17,3 +18,4 @@ test('It should pass any number of children without knows then beforehand', () =
   expect(screen.getByText('Child 2')).toBeInTheDocument();
   expect(screen.getByText('Child 3')).toBeInTheDocument();
 });
+StyleSheetTestUtils.suppressStyleInjection();

@@ -5,6 +5,7 @@ import Header from "../Header/Header";
 import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
 import Notifications from "../Notifications/Notifications";
+const {StyleSheetTestUtils} = require("aphrodite");
 
   test('renders App component without craching', () => {
     render(<App />);
@@ -88,5 +89,5 @@ import Notifications from "../Notifications/Notifications";
     expect(newsContent).toBeInTheDocument();
   });
 
-jest.useFakeTimers();
+  StyleSheetTestUtils.suppressStyleInjection();
 

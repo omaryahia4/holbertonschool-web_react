@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import CourseListRow from './CourseListRow';
+const {StyleSheetTestUtils} = require("aphrodite");
 
 describe('CourseListRow Component', () => {
 
@@ -55,3 +56,4 @@ describe('CourseListRow Component', () => {
   });
 
 });
+StyleSheetTestUtils.suppressStyleInjection();

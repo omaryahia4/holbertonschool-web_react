@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import BodySectionWithMarginBottom from './BodySectionWithMarginBottom';
-
+const {StyleSheetTestUtils} = require("aphrodite");
 
 describe('BodySectionWithMarginBottom', () => {
 
@@ -26,4 +26,4 @@ describe('BodySectionWithMarginBottom', () => {
     expect(screen.getByText(content)).toBeInTheDocument();
   });
 });
-jest.useFakeTimers();
+StyleSheetTestUtils.suppressStyleInjection();
