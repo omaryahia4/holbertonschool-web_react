@@ -8,6 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+test-NotificationItem-component-seq2.spec.js
 dist
 dist-ssr
 *.local
