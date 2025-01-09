@@ -59,7 +59,7 @@ function App() {
   }, []);
 
   return (
-    <newContext.Provider value={{ user, logout: logOut }}>
+    <newContext.Provider value={{ user, logOut }}>
       <Notification
         notifications={notifications}
         displayDrawer={displayDrawer}
