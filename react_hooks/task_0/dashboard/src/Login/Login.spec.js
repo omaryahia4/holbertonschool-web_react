@@ -16,8 +16,8 @@ describe('Login Component', () => {
 
   test('renders 2 input elements', () => {
     render(<Login/>);
-    const inputElements = screen.getAllByRole('textbox');
-    const passwordInputs = screen.getAllByRole('textbox', { hidden: true });
+    const inputElements = screen.getAllByLabelText(/email/i);
+    const passwordInputs = screen.getAllByLabelText(/password/i);
     expect(inputElements.length + passwordInputs.length).toBe(2);
 
   });
@@ -40,8 +40,8 @@ describe('Login Component', () => {
   test('focuses the email input when the email label is clicked', async() => {
     render(<Login />)
 
-  const emailInput = screen.getByLabelText('Email');
-  const emailLabel = screen.getByText('Email');
+  const emailInput = screen.getByLabelText(/Email/i);
+  const emailLabel = screen.getByText(/Email/i);
 
   userEvent.click(emailLabel);
 

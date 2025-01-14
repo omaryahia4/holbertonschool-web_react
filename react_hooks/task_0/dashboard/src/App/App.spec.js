@@ -52,7 +52,7 @@ test('displays the title "Course list" above the CourseList component when isLog
   const loginButton = screen.getByRole('button', { name: /OK/i });
   fireEvent.click(loginButton);
 
-  const courseListTitle = screen.getByText("Course list");
+  const courseListTitle = screen.getByText(/Course list/i);
   expect(courseListTitle).toBeInTheDocument();
 });
 

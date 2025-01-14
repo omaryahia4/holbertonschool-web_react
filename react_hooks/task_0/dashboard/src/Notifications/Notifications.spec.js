@@ -93,32 +93,36 @@ describe('Notifications component', () => {
 
 
   test('it should rerender when prop values change', () => {
-    const consoleSpy = jest.spyOn(console, 'log');
+    const markAsReadMock = jest.fn();
+  
     const initialProps = {
-      displayDrawer: false,
-      notifications: [],
-    };
-  
-    render(<Notifications {...initialProps} />);
-  
-    expect(screen.queryByText('Here is the list of notifications')).toBeNull();
-  
-    const updatedProps = {
       displayDrawer: true,
       notifications: [
-        { id: 1, type: 'default', value: 'New notification' }
+        { id: 1, type: 'default', value: 'New notification' },
+        { id: 2, type: 'urgent', value: 'Urgent notification' }
       ],
+      markNotificationAsRead: markAsReadMock,
     };
   
-    render(<Notifications {...updatedProps} />);
-    const firstListItemElement = screen.getAllByRole('listitem')[0];
+    const { rerender } = render(<Notifications {...initialProps} />);
   
-    fireEvent.click(firstListItemElement)
+    const listItems = screen.getAllByRole('listitem');
+    expect(listItems).toHaveLength(2);
   
-    expect(consoleSpy).toHaveBeenCalledWith('Notification 1 has been marked as read')
+    fireEvent.click(screen.getByText('New notification'));
   
-    expect(screen.getByText('Here is the list of notifications')).toBeInTheDocument();
-    expect(screen.getByRole('listitem')).toBeInTheDocument()
+    expect(markAsReadMock).toHaveBeenCalledWith(1);
+  
+    const updatedProps = {
+      ...initialProps,
+      notifications: [
+        { id: 2, type: 'urgent', value: 'Urgent notification' }
+      ]
+    };
+  
+    rerender(<Notifications {...updatedProps} />);
+  
+    expect(screen.getAllByRole('listitem')).toHaveLength(1);
   });
 
   test('should rerender when the notifications length changes', () => {
