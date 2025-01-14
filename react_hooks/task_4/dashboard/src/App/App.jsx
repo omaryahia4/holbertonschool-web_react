@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import Notification from '../Notifications/Notifications';
 import Header from '../Header/Header';
 import Login from "../Login/Login";
