@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import Notification from '../Notifications/Notifications';
 import Header from '../Header/Header';
 import Login from "../Login/Login";
@@ -27,13 +27,13 @@ function App() {
   const [user, setUser] = useState({ ...newContext.user });
   const [notifications, setNotifications] = useState(notificationsList);
 
-  const handleDisplayDrawer = () => {
+  const handleDisplayDrawer = useCallback(() => {
     setDisplayDrawer(true);
-  };
+  }, []);
 
-  const handleHideDrawer = () => {
+  const handleHideDrawer = useCallback(() => {
     setDisplayDrawer(false);
-  };
+  }, []);
 
   const logIn = useCallback((email, password) => {
     setUser({
@@ -58,8 +58,10 @@ function App() {
     );
   }, []);
 
+  const contextValue = useMemo(() => ({ user, logout: logOut }), [user, logOut]);
+
   return (
-    <newContext.Provider value={{ user, logOut }}>
+    <newContext.Provider value={contextValue}>
       <Notification
         notifications={notifications}
         displayDrawer={displayDrawer}
@@ -75,7 +77,11 @@ function App() {
           </BodySectionWithMarginBottom>
         ) : (
           <BodySectionWithMarginBottom title="Log in to continue">
-            <Login login={logIn} email={user.email} password={user.password} />
+            <Login
+              login={logIn}
+              email={user.email}
+              password={user.password}
+            />
           </BodySectionWithMarginBottom>
         )}
         <BodySection>
