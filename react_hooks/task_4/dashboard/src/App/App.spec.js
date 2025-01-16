@@ -9,9 +9,8 @@ import Footer from "../Footer/Footer";
 import Notifications from "../Notifications/Notifications";
 import fetchNotifications from './App'
 
-afterEach(() => {
-  mockAxios.reset();
-});
+
+jest.mock('axios');
 
 
 test('renders App component without crashing', () => {
@@ -165,3 +164,36 @@ it('fetches and displays notifications when App is rendered', async () => {
   expect(getByText('New resume available')).toBeInTheDocument();
   expect(getByText('Latest notification content')).toBeInTheDocument();
 });
+
+// it('fetches and displays courses after user logs in', async () => {
+
+//   const mockCourses = {
+//     courses: [
+//       { "id": 1, "name": "ES6", "credit": 60 },
+//       { "id": 2, "name": "Webpack", "credit": 20 },
+//       { "id": 3, "name": "React", "credit": 40 }
+//     ],
+//   };
+
+//   mockAxios.get.mockResolvedValueOnce(mockCourses );
+
+//   const { getByText, findByText} = render(<App />);
+
+//   const emailInput = screen.getByLabelText(/email/i);
+//   const passwordInput = screen.getByLabelText(/password/i);
+//   const loginButton = screen.getByRole('button', { name: /ok/i });
+
+//   expect(loginButton).toBeInTheDocument()
+
+//   fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+//   fireEvent.change(passwordInput, { target: { value: 'password123' } });
+  
+//   fireEvent.submit(loginButton);
+
+//   await findByText('ES6');
+
+//   // expect(getByText('ES6')).toBeInTheDocument();
+//   // expect(getByText('Webpack')).toBeInTheDocument();
+//   // expect(getByText('React')).toBeInTheDocument();
+// });
+

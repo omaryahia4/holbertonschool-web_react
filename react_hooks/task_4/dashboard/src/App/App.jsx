@@ -31,6 +31,7 @@ function App() {
       password,
       isLoggedIn: true,
     });
+    console.log("user", user);
   };
 
   const logOut = () => {
@@ -52,7 +53,7 @@ function App() {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get('/notifications.json');
+        const response = await axios.get('http://localhost:5173/notifications.json');
         const fetchedNotifications = response.data.notifications.map((notif) => {
           if (notif.html && notif.html.__html === "") {
             notif.html.__html = getLatestNotification();
@@ -71,8 +72,9 @@ function App() {
     if (user.isLoggedIn) {
       const fetchCourses = async () => {
         try {
-          const response = await axios.get('/courses.json');
+          const response = await axios.get('http://localhost:5173/courses.json');
           setCourses(response.data.courses);
+          
         } catch (error) {
           console.error('Error fetching courses:', error);
         }
