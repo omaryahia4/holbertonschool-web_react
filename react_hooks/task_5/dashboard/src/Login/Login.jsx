@@ -20,7 +20,7 @@ const Login = ({ login }) => {
       <div className="App-body">
         <p>Login to access the full dashboard</p>
         <div className="form">
-          <label htmlFor="email">Email: </label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             name="user_email"
@@ -28,7 +28,7 @@ const Login = ({ login }) => {
             value={email}
             onChange={handleChangeEmail}
           />
-          <label htmlFor="password">Password: </label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             name="user_password"
