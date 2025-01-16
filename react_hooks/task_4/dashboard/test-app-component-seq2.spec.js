@@ -1,62 +1,46 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import mockAxios from 'jest-mock-axios';
 import { newContext } from './src/Context/context';
 import App from "./src/App/App";
-import { getLatestNotification } from './src/utils/utils';
 
-jest.mock('axios', () => require('jest-mock-axios').default);
 
-describe('App Component Tests', () => {
-  const mockNotificationsResponse = {
-    data: {
-      notifications: [
-        { id: 1, type: 'default', value: 'New course available' },
-        { id: 2, type: 'urgent', value: 'New resume available' },
-        { id: 3, type: 'urgent', html: { __html: getLatestNotification() } }
-      ]
-    }
-  };
+test('should render login page when the user is not logged in and handle login flow correctly', async () => {
+	const user = userEvent.setup()
 
-  // clean up state after each test
-  afterEach(() => {
-    mockAxios.reset();
-  });
+	const mockedContextUser = {
+		email: '',
+		password: '',
+		isLoggedIn: false,
+	};
 
-  test('verify notification item deletion', async () => {
-    const user = userEvent.setup();
-		const mockedContextUser = {
-			email: '',
-			password: '',
-			isLoggedIn: false,
-		};
-    
-    mockAxios.get.mockImplementationOnce(() => Promise.resolve(mockNotificationsResponse));
-    
-    render(
-			<newContext.Provider value={{ user: { ...mockedContextUser }, logOut: jest.fn() }}>
-				<App />
-			</newContext.Provider>
-		);
+	const { container } = render(
+		<newContext.Provider value={{ user: { ...mockedContextUser }, logOut: jest.fn() }}>
+			<App />
+		</newContext.Provider>
+	);
 
-    await waitFor(() => {
-      const listItems = screen.getAllByRole('listitem');
-      expect(listItems).toHaveLength(3);
-    });
+	expect(screen.getByText('Log in to continue')).toBeInTheDocument();
 
-    expect(screen.getByText('New course available')).toBeInTheDocument();
-    expect(screen.getByText('New resume available')).toBeInTheDocument();
-    expect(screen.getByText((content, element) => {
-      return element.textContent === 'Urgent requirement - complete by EOD';
-    })).toBeInTheDocument();
+	const emailInput = screen.getByLabelText(/email/i);
+	const passwordInput = screen.getByLabelText(/password/i);
+	const submitButton = screen.getByRole('button', { name: /ok/i });
 
-    await user.click(screen.getByText('New course available'));
-    
-    await waitFor(() => {
-      expect(screen.queryByText('New course available')).not.toBeInTheDocument();
-      expect(screen.getAllByRole('listitem')).toHaveLength(2);
-    });
+	await user.type(emailInput, 'test@example.com');
+  await user.type(passwordInput, 'password123');
+  await user.click(submitButton);
 
-    expect(mockAxios.get).toHaveBeenCalledWith('http://localhost:5173/notifications.json');
-  });
+	expect(screen.getByText(/course list/i)).toBeInTheDocument();
+	expect(screen.getByRole('table')).toBeInTheDocument();
+
+	const logoutSection = container.querySelector('div#logoutSection');
+	expect(within(logoutSection).getByText('test@example.com')).toBeInTheDocument();
+	expect(within(logoutSection).getByText(/logout/i)).toBeInTheDocument();
+
+	const logoutButton = within(logoutSection).getByText(/logout/i);
+
+	await act(async () => {
+		await user.click(logoutButton);
+	});
+
+	expect(screen.getByText(/log in to continue/i)).toBeInTheDocument();
 });

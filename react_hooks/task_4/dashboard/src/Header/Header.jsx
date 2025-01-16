@@ -12,7 +12,7 @@ const Header = () => {
       <h1>School dashboard</h1>
       {user.isLoggedIn && (
         <div id="logoutSection">
-          Welcome {user.email} (<a href="" onClick={logOut}>logout</a>)
+           Welcome <b>{user.email}</b> (<a href="" onClick={logOut}>logout</a>)
         </div>
       )}
     </div>
