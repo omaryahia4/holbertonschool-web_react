@@ -34,7 +34,8 @@ const useLogin = (onLogin) => {
   };
 
   return {
-    formData,
+    email: formData.email,
+    password: formData.password,
     enableSubmit,
     handleChangeEmail,
     handleChangePassword,
