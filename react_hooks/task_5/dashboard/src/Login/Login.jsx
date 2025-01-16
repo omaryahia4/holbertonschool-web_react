@@ -5,12 +5,15 @@ import './Login.css';
 
 const Login = ({ login }) => {
   const {
-    formData,
+    email,
+    password,
     enableSubmit,
     handleChangeEmail,
     handleChangePassword,
     handleLoginSubmit,
-  } = useLogin(login);
+  } = useLogin({
+    onLogin: login
+  });;
 
   return (
     <form aria-label="form" onSubmit={handleLoginSubmit}>
@@ -22,7 +25,7 @@ const Login = ({ login }) => {
             type="email"
             name="user_email"
             id="email"
-            value={formData.email}
+            value={email}
             onChange={handleChangeEmail}
           />
           <label htmlFor="password">Password: </label>
@@ -30,7 +33,7 @@ const Login = ({ login }) => {
             type="password"
             name="user_password"
             id="password"
-            value={formData.password}
+            value={password}
             onChange={handleChangePassword}
           />
           <input value="OK" type="submit" disabled={!enableSubmit} />

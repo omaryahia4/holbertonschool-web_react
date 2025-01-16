@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useLogin = ({onLogin}) => {
+const useLogin = ({ onLogin }) => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [enableSubmit, setEnableSubmit] = useState(false);
 
