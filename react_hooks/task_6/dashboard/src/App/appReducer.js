@@ -16,17 +16,22 @@ export const APP_ACTIONS = {
 
   export function appReducer(state = initialState, action) {
     switch (action.type) {
-    case APP_ACTIONS.LOGIN:
-        return {
-            ...state,
-            user: { ...action.payload },
-        };
+        case APP_ACTIONS.LOGIN:
+            return {
+              ...state,
+              user: {
+                email: action.payload.email,
+                password: action.payload.password,
+                isLoggedIn: true,
+              },
+            };
   
-    case APP_ACTIONS.LOGOUT:
-        return {
-            ...state,
-            user: { isLoggedIn: false, email: '', password: '' },
-        };
+            case APP_ACTIONS.LOGOUT:
+                return {
+                  ...state,
+                  user: { isLoggedIn: false, email: '', password: '' },
+                  courses: [],
+                };
   
       case APP_ACTIONS.TOGGLE_DRAWER:
         return {
