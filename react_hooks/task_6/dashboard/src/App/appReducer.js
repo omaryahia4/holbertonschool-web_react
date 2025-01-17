@@ -39,15 +39,11 @@ export const APP_ACTIONS = {
           displayDrawer: !state.displayDrawer,
         };
   
-      case APP_ACTIONS.MARK_NOTIFICATION_READ:
-        return {
-          ...state,
-          notifications: state.notifications.map((notification) =>
-            notification.id === action.payload.id
-              ? { ...notification, read: true }
-              : notification
-          ),
-        };
+        case APP_ACTIONS.MARK_NOTIFICATION_READ:
+            return {
+              ...state,
+              notifications: state.notifications.filter(notification => notification.id !== action.payload),
+            };
   
       case APP_ACTIONS.SET_NOTIFICATIONS:
         return {
