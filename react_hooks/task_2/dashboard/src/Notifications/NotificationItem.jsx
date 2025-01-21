@@ -6,7 +6,7 @@ const NotificationItem = memo(({ type, value, html, markAsRead}) => {
       style={{ color: type === 'default' ? 'blue' : 'red' }}
       data-notification-type={type}
       dangerouslySetInnerHTML={type === 'urgent' && html !== undefined ? html : undefined}
-      onClick={() => markAsRead()}
+      onClick={markAsRead}
     >
       {type === 'urgent' && html !== undefined ? null : value}
     </li>
