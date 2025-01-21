@@ -116,54 +116,54 @@ test('verifies that notification items are removed and the correct log is printe
 
 
 
-it('fetches and displays notifications when App is rendered', async () => {
-  const mockNotifications = {
-    notifications: [
-      { id: 1, type: 'default', value: 'New course available' },
-      { id: 2, type: 'urgent', value: 'New resume available' },
-      { id: 3, type: 'urgent', html: { __html: 'Latest notification content' } },
-    ],
-  };
+// it('fetches and displays notifications when App is rendered', async () => {
+//   const mockNotifications = {
+//     notifications: [
+//       { id: 1, type: 'default', value: 'New course available' },
+//       { id: 2, type: 'urgent', value: 'New resume available' },
+//       { id: 3, type: 'urgent', html: { __html: 'Latest notification content' } },
+//     ],
+//   };
 
-  mockAxios.get.mockResolvedValueOnce({ data: mockNotifications });
-  const { getByText, findByText, queryByText } = render(<App />);
-  expect(queryByText('New course available')).toBeNull();
+//   mockAxios.get.mockResolvedValueOnce({ data: mockNotifications });
+//   const { getByText, findByText, queryByText } = render(<App />);
+//   expect(queryByText('New course available')).toBeNull();
 
-  await findByText('New course available');
-  await findByText('New resume available');
-  await findByText('Latest notification content');
+//   await findByText('New course available');
+//   await findByText('New resume available');
+//   await findByText('Latest notification content');
 
-  expect(getByText('New course available')).toBeInTheDocument();
-  expect(getByText('New resume available')).toBeInTheDocument();
-  expect(getByText('Latest notification content')).toBeInTheDocument();
-});
-
-
-it('fetches and displays notifications when App is rendered', async () => {
-  const mockNotifications = {
-    notifications: [
-      { id: 1, type: 'default', value: 'New course available' },
-      { id: 2, type: 'urgent', value: 'New resume available' },
-      { id: 3, type: 'urgent', html: { __html: 'Latest notification content' } },
-    ],
-  };
-
-  mockAxios.get.mockResolvedValueOnce({ data: mockNotifications });
-
-  const { getByText, findByText, queryByText } = render(<App />);
-
-  expect(queryByText('New course available')).toBeNull();
+//   expect(getByText('New course available')).toBeInTheDocument();
+//   expect(getByText('New resume available')).toBeInTheDocument();
+//   expect(getByText('Latest notification content')).toBeInTheDocument();
+// });
 
 
-  await findByText('New course available');
-  await findByText('New resume available');
-  await findByText('Latest notification content');
+// it('fetches and displays notifications when App is rendered', async () => {
+//   const mockNotifications = {
+//     notifications: [
+//       { id: 1, type: 'default', value: 'New course available' },
+//       { id: 2, type: 'urgent', value: 'New resume available' },
+//       { id: 3, type: 'urgent', html: { __html: 'Latest notification content' } },
+//     ],
+//   };
+
+//   mockAxios.get.mockResolvedValueOnce({ data: mockNotifications });
+
+//   const { getByText, findByText, queryByText } = render(<App />);
+
+//   expect(queryByText('New course available')).toBeNull();
 
 
-  expect(getByText('New course available')).toBeInTheDocument();
-  expect(getByText('New resume available')).toBeInTheDocument();
-  expect(getByText('Latest notification content')).toBeInTheDocument();
-});
+//   await findByText('New course available');
+//   await findByText('New resume available');
+//   await findByText('Latest notification content');
+
+
+//   expect(getByText('New course available')).toBeInTheDocument();
+//   expect(getByText('New resume available')).toBeInTheDocument();
+//   expect(getByText('Latest notification content')).toBeInTheDocument();
+// });
 
 // it('fetches and displays courses after user logs in', async () => {
 

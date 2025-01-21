@@ -23,7 +23,7 @@ test('renders School Dashboard heading', () => {
         <Header />
       </newContext.Provider>
     );
-    expect(screen.queryByText(/Welcome/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Welcome/i)).not.toBeInTheDocument();
   });
 
   test('displays the logoutSection when user is logged in', () => {
@@ -32,7 +32,8 @@ test('renders School Dashboard heading', () => {
         <Header />
       </newContext.Provider>
     );
-    expect(screen.getByText(/Welcome test@example.com/)).toBeInTheDocument();
+    expect(screen.getByText(/Welcome/i)).toBeInTheDocument();
+    expect(screen.getByText('test@example.com')).toBeInTheDocument();
   });
 
   test('calls logOut when clicking the logout link', () => {
