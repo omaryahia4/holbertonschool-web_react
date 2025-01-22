@@ -43,7 +43,7 @@ const Notifications = memo(({
               </ul>
             </>
           ) : (
-            <p>No new notification for now</p>
+            <p>No new notifications for now</p>
           )}
         </div>
       )}
