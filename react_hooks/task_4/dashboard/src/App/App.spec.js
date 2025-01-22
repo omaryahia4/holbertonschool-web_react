@@ -11,6 +11,22 @@ import fetchNotifications from './App'
 
 
 jest.mock('axios');
+jest.mock('../Context/context', () => {
+  const React = require('react');
+  return {
+    newContext: React.createContext({
+      user: {
+        email: '',
+        password: '',
+        isLoggedIn: false,
+      },
+      logOut: jest.fn(),
+    }),
+  };
+});
+
+
+describe('App Component - Testing all features', () => {
 
 
 test('renders App component without crashing', () => {
@@ -47,34 +63,6 @@ test('renders 2 input elements and a button with the text "OK" when isLoggedIn i
 });
 
 
-// it('displays the title "Course list" above the CourseList component when isLoggedIn is true', async () => {
-
-//   const coursesMock = {
-//     courses: [
-//       { id: 1, name: 'ES6', credit: 60 },
-//       { id: 2, name: 'Webpack', credit: 20 },
-//       { id: 3, name: 'React', credit: 40 },
-//     ],
-//   };
-
-//   mockAxios.get.mockResolvedValueOnce({ data: coursesMock });
-
-//   render(<App />);
-
-//   const emailInput = screen.getByLabelText(/email/i);
-//   const passwordInput = screen.getByLabelText(/password/i);
-
-//   fireEvent.change(emailInput, { target: { value: 'user@example.com' } });
-//   fireEvent.change(passwordInput, { target: { value: 'password' } });
-
-//   const loginButton = screen.getByRole('button', { name: /OK/i });
-//   fireEvent.click(loginButton);
-
-//   await waitFor(() => screen.findByText('Course list'), { timeout: 5000 });
-
-//   const courseListTitle = screen.getByText("Course list");
-//   expect(courseListTitle).toBeInTheDocument();
-// });
 
 test('calls handleDisplayDrawer to show the notification drawer', () => {
   render(<App />);
@@ -118,6 +106,73 @@ test('displays "News from the School" and "Holberton School News goes here" by d
   const newsContent = screen.getByText(/Holberton School News goes here/i);
   expect(newsContent).toBeInTheDocument();
 });
+
+
+test('logIn updates the user state immutably', () => {
+  const { container } = render(<App />);
+
+  expect(screen.getByText(/log in to continue/i)).toBeInTheDocument();
+
+  const emailInput = screen.getByLabelText(/email/i);
+  const passwordInput = screen.getByLabelText(/password/i);
+  const loginButton = screen.getByRole('button', { name: /ok/i });
+
+  fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+  fireEvent.change(passwordInput, { target: { value: 'password123' } });
+  fireEvent.click(loginButton);
+
+  expect(screen.getByText(/course list/i)).toBeInTheDocument();
+  expect(container).not.toHaveTextContent(/log in to continue/i);
+});
+
+test('logOut updates the user state immutably', () => {
+  const { container } = render(<App />);
+
+  const emailInput = screen.getByLabelText(/email/i);
+  const passwordInput = screen.getByLabelText(/password/i);
+  const loginButton = screen.getByRole('button', { name: /ok/i });
+
+  fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+  fireEvent.change(passwordInput, { target: { value: 'password123' } });
+  fireEvent.click(loginButton);
+
+  const logoutButton = screen.getByText(/logout/i);
+  fireEvent.click(logoutButton);
+
+  expect(screen.getByText(/log in to continue/i)).toBeInTheDocument();
+  expect(container).not.toHaveTextContent(/course list/i);
+});
+
+
+// it('displays the title "Course list" above the CourseList component when isLoggedIn is true', async () => {
+
+//   const coursesMock = {
+//     courses: [
+//       { id: 1, name: 'ES6', credit: 60 },
+//       { id: 2, name: 'Webpack', credit: 20 },
+//       { id: 3, name: 'React', credit: 40 },
+//     ],
+//   };
+
+//   mockAxios.get.mockResolvedValueOnce({ data: coursesMock });
+
+//   render(<App />);
+
+//   const emailInput = screen.getByLabelText(/email/i);
+//   const passwordInput = screen.getByLabelText(/password/i);
+
+//   fireEvent.change(emailInput, { target: { value: 'user@example.com' } });
+//   fireEvent.change(passwordInput, { target: { value: 'password' } });
+
+//   const loginButton = screen.getByRole('button', { name: /OK/i });
+//   fireEvent.click(loginButton);
+
+//   await waitFor(() => screen.findByText('Course list'), { timeout: 5000 });
+
+//   const courseListTitle = screen.getByText("Course list");
+//   expect(courseListTitle).toBeInTheDocument();
+// });
+
 
 // test('verifies that notification items are removed and the correct log is printed when clicked', async () => {
 //   jest.spyOn(console, 'log').mockImplementation(() => {});
@@ -223,3 +278,4 @@ test('displays "News from the School" and "Holberton School News goes here" by d
 //   // expect(getByText('React')).toBeInTheDocument();
 // });
 
+})
