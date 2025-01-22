@@ -2,7 +2,7 @@ import React from "react";
 import mockAxios from 'jest-mock-axios';
 import { render, screen, fireEvent, act, waitFor } from "@testing-library/react";
 import axios from 'axios';
-import App from "/home/omar/HBTN_curr_test/holbertonschool-web_react/react_hooks/task_4/dashboard/app-component-seq2.jsx";
+import App from "./App";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
