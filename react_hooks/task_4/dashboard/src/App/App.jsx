@@ -36,20 +36,22 @@ function App() {
   }, []);
 
   const logIn = (email, password) => {
-    setUser({
+    setUser((prevUser) => ({
+      ...prevUser,
       email,
       password,
       isLoggedIn: true,
-    });
-  }
-
+    }));
+  };
+  
   const logOut = () => {
-    setUser({
+    setUser((prevUser) => ({
+      ...prevUser,
       email: '',
       password: '',
       isLoggedIn: false,
-    });
-  }
+    }));
+  };
 
   const markNotificationAsRead = useCallback((id) => {
     console.log(`Notification ${id} has been marked as read`);
