@@ -110,7 +110,7 @@ function App() {
         handleHideDrawer={handleHideDrawer}
         markNotificationAsRead={markNotificationAsRead}
       />
-      <Header user={state.user} />
+      <Header user={state.user} logOut={logOut} />
       {state.user.isLoggedIn ? (
         <BodySectionWithMarginBottom title="Course list">
           <CourseList courses={state.courses} />
