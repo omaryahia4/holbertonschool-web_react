@@ -63,7 +63,7 @@ function App() {
     console.log(`Notification ${id} has been marked as read`);
     dispatch({
       type: APP_ACTIONS.MARK_NOTIFICATION_READ,
-      payload: { id },
+      payload: id,
     });
   }, []);
 
