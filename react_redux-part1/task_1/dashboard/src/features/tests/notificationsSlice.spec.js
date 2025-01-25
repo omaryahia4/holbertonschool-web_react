@@ -85,4 +85,3 @@ import notificationsReducer, {
       expect(stateAfterHide.displayDrawer).toBe(false);
     });
   });
-  
