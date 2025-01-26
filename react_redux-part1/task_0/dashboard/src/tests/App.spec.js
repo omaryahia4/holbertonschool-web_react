@@ -3,7 +3,7 @@ import mockAxios from "jest-mock-axios";
 import { render, screen, fireEvent, act, waitFor } from "@testing-library/react";
 import App from "../App";
 import Header from "../components/Header/Header";
-import Login from "../Login/Login";
+import Login from "../pages/Login/Login";
 import Footer from "../components/Footer/Footer";
 import Notifications from "../components/Notifications/Notifications";
 

@@ -54,7 +54,7 @@ const Login = ({ login }) => {
 
   return (
     <form aria-label="form" onSubmit={handleLoginSubmit}>
-      <div className={css(styles.appBody)}>
+       <div className={`${css(styles.appBody)} App-body`}>
         <p>Login to access the full dashboard</p>
         <div className={css(styles.form)}>
           <label htmlFor="email" className={css(styles.label)}>Email</label>

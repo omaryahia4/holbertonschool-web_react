@@ -3,7 +3,7 @@ import axios from 'axios';
 import { StyleSheet, css } from 'aphrodite';
 import Notification from './components/Notifications/Notifications';
 import Header from './components/Header/Header';
-import Login from "../src/pages/Login/Login";
+import Login from "./pages/Login/Login";
 import Footer from './components/Footer/Footer';
 import CourseList from './pages/CourseList/CourseList';
 import { getLatestNotification } from './utils/utils';

@@ -1,4 +1,4 @@
-import { getFooterCopy } from '../utils/utils';
+import { getFooterCopy } from '../../utils/utils';
 import { render, screen } from '@testing-library/react';
 import Footer from '../Footer/Footer';
 

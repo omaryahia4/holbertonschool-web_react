@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import App from '../App/App';
-
+import App from '../../App';
+const {StyleSheetTestUtils} = require("aphrodite");
 
 describe('CourseList Component', () => {
   jest.mock('axios');
@@ -30,11 +30,13 @@ describe('CourseList Component', () => {
     fireEvent.change(passwordInput, { target: { value: 'password123' } });
     fireEvent.click(loginButton);
   
-    // // Wait for courses to be fetched and rendered
-    // await waitFor(() => screen.getByText('ES6')); // Wait for course data to be rendered
+    // Wait for courses to be fetched and rendered
+    await waitFor(() => screen.getByText('ES6')); // Wait for course data to be rendered
   
     // Check if the course list is displayed with the correct number of rows
     const rows = screen.getAllByRole('row');
     expect(rows).toHaveLength(5); // 2 header rows and 3 course rows
 });
 });
+
+StyleSheetTestUtils.suppressStyleInjection();

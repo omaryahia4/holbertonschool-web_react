@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Header from "./Header";
+const {StyleSheetTestUtils} = require("aphrodite");
 
 describe('Header Component', () => {
   test('renders School Dashboard heading', () => {
@@ -33,3 +34,4 @@ describe('Header Component', () => {
     expect(mockLogOut).toHaveBeenCalled();
   });
 });
+StyleSheetTestUtils.suppressStyleInjection();

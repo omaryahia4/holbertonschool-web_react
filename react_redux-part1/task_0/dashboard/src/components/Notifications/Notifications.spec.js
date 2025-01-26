@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Notifications from './Notifications';
 import { getLatestNotification } from '../../utils/utils'
-
+const {StyleSheetTestUtils} = require("aphrodite");
 
 describe('Notifications component', () => {
   const logSpy = jest.spyOn(console, 'log')
@@ -88,7 +88,7 @@ describe('Notifications component', () => {
     };
 
     render(<Notifications {...props} />);
-    expect(screen.getByText('No new notification for now')).toBeInTheDocument();
+    expect(screen.getByText(/No new notifications for now/i)).toBeInTheDocument();
   });
 
   test('it should rerender when the displayDrawer prop changes', () => {
@@ -175,3 +175,5 @@ describe('Notifications component', () => {
   });
 
 });
+
+StyleSheetTestUtils.suppressStyleInjection();
