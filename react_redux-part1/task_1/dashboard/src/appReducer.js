@@ -4,6 +4,7 @@ export const APP_ACTIONS = {
   TOGGLE_DRAWER: 'TOGGLE_DRAWER',
   MARK_NOTIFICATION_READ: 'MARK_NOTIFICATION_READ',
   SET_COURSES: 'SET_COURSES',
+  SET_NOTIFICATIONS: 'SET_NOTIFICATIONS'
 };
 
 export const initialState = {
@@ -51,6 +52,12 @@ export function appReducer(state = initialState, action) {
       return {
         ...state,
         courses: action.payload,
+      };
+
+      case APP_ACTIONS.SET_NOTIFICATIONS: 
+      return {
+        ...state,
+        notifications: action.payload,
       };
 
     default:

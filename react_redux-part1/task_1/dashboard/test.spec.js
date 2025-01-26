@@ -1,106 +1,86 @@
-import notificationsSlice, {
-    fetchNotifications,
-  } from './src/features/notifications/notificationsSlice';
-  import axios from 'axios';
-  import MockAdapter from 'axios-mock-adapter';
-  
-  const mock = new MockAdapter(axios);
-  
-  describe('notificationsSlice', () => {
-    const initialState = {
-      notifications: [],
-      displayDrawer: true,
-    };
-  
-    test('should return the initial state', () => {
-      expect(notificationsSlice(undefined, { type: 'unknown' })).toEqual(
-        initialState
-      );
-    });
-  
-    describe('fetchNotifications async thunk', () => {
-      test('should handle fetchNotifications.pending', () => {
-        const action = { type: fetchNotifications.pending.type };
-        const state = notificationsSlice(initialState, action);
-        expect(state).toEqual({
-          ...initialState,
-        });
-      });
-  
-      test('should handle fetchNotifications.rejected', () => {
-        const action = {
-          type: fetchNotifications.rejected.type,
-        };
-        const state = notificationsSlice(initialState, action);
-        expect(state).toEqual({
-          ...initialState,
-        });
-      });
-  
-      // typo in "localhost"
-      test('should handle fetchNotifications.rejected when base URL or port is incorrect', async () => {
-        const incorrectBaseURL = 'http://loclhost:5173';
-        mock.onGet(`${incorrectBaseURL}/notifications.json`).networkError();
-  
-        const dispatch = jest.fn();
-        const getState = jest.fn();
-  
-        await fetchNotifications()(dispatch, getState, null);
-  
-        expect(dispatch).toHaveBeenCalledWith(
-          expect.objectContaining({
-            type: fetchNotifications.rejected.type,
-          })
-        );
-      });
-  
-      // typo in "notifications"
-      test('should handle fetchNotifications.rejected when endpoint is incorrect', async () => {
-        const incorrectEndpoint = 'http://localhost:5173/notifictions.json';
-        mock.onGet(incorrectEndpoint).reply(404);
-  
-        const dispatch = jest.fn();
-        const getState = jest.fn();
-  
-        await fetchNotifications()(dispatch, getState, null);
-  
-        expect(dispatch).toHaveBeenCalledWith(
-          expect.objectContaining({
-            type: fetchNotifications.rejected.type,
-          })
-        );
-      });
-  
-      test('should handle fetchNotifications.fulfilled when API request is successful', async () => {
-        const notifications = [
-          { id: 1, type: "default", value: "New course available" },
-          { id: 2, type: "urgent", value: "New resume available" },
-          { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' } },
-        ];
-  
-        // intercept axios request
-        mock.onGet('http://localhost:5173/notifications.json').reply(200, {
-          notifications,
-        });
-  
-        // make the API call
-        const notificationsResponse = await axios.get('http://localhost:5173/notifications.json');
-      
-        const dispatch = jest.fn();
-        const getState = jest.fn();
+import { act, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import mockAxios from 'jest-mock-axios';
+import App from './src/App';
+import { getLatestNotification } from './src/utils/utils';
 
-        await fetchNotifications()(dispatch, getState, null);
-  
-        expect(dispatch).toHaveBeenCalledTimes(2);
-    
-        const fulfilledAction = dispatch.mock.calls[1][0];
-    
-        expect(fulfilledAction).toEqual(
-          expect.objectContaining({
-            type: fetchNotifications.fulfilled.type,
-            payload: notificationsResponse.data.notifications,
-          })
-        );
-      });
+jest.mock('axios', () => require('jest-mock-axios').default);
+
+const originalError = console.error;
+const originalWarn = console.warn;
+
+let consoleOutput = [];
+
+console.error = (...args) => {
+  consoleOutput.push(['error', args[0]]);
+};
+
+console.warn = (...args) => {
+  consoleOutput.push(['warn', args[0]]);
+};
+
+afterAll(() => {
+  console.error = originalError;
+  console.warn = originalWarn;
+});
+
+beforeEach(() => {
+  consoleOutput = [];
+  mockAxios.reset();
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+  console.log('CONSOLE', consoleOutput);
+  if (consoleOutput.length > 0) {
+    throw new Error(
+      'Test failed: Console warnings or errors detected:\n' +
+      consoleOutput.map(([type, message]) => `${type}: ${message}`).join('\n')
+    );
+  }
+});
+
+describe('App Component default behavior', () => {
+  const mockNotificationsResponse = {
+    data: {
+      notifications: [
+        { id: 1, type: 'default', value: 'New course available' },
+        { id: 2, type: 'urgent', value: 'New resume available' },
+        { id: 3, type: 'urgent', html: { __html: getLatestNotification() } }
+      ]
+    }
+  };
+
+  test('should display CourseList and welcome message after login and hide them after logout', async () => {
+    mockAxios.get.mockImplementationOnce(() => Promise.resolve(mockNotificationsResponse));
+
+    await act(async () => {
+      render(<App />);
+    });
+
+    expect(screen.getByText('Log in to continue')).toBeInTheDocument();
+
+    const emailInput = screen.getByRole('textbox', { name: /email/i });
+    const passwordInput = screen.getByLabelText(/password/i);
+    const submitButton = screen.getByRole('button', { name: /ok/i });
+
+    await act(async () => {
+      await userEvent.type(emailInput, 'email@example.com');
+      await userEvent.type(passwordInput, 'password123');
+      await userEvent.click(submitButton);
+    });
+
+    expect(screen.getByText('Course list')).toBeInTheDocument();
+
+    const logoutLink = screen.getByText(/(logout)/i);
+    await act(async () => {
+      await userEvent.click(logoutLink);
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText(/log in to continue/i)).toBeInTheDocument();
+      expect(screen.queryByText(/course list/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/Welcome/)).not.toBeInTheDocument();
     });
   });
+});
