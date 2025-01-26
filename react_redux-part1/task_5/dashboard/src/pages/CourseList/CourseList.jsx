@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 });
 
 export const CourseList = () => {
-  const courses = useSelector((state) => state.courses);
+  const courses = useSelector((state) => state.courses.courses);
   console.log("courses:", courses)
   return (
     <table id="CourseList" className={css(styles.table)}>
