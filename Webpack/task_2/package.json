@@ -15,12 +15,12 @@
     "css-loader": "^7.1.2",
     "file-loader": "^6.2.0",
     "image-webpack-loader": "^8.1.0",
+    "style-loader": "^4.0.0",
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
     "jquery": "^3.6.0",
-    "lodash": "^4.17.21",
-    "style-loader": "^0.23.0"
+    "lodash": "^4.17.21"
   }
 }
