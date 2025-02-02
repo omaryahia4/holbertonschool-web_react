@@ -1,4 +1,4 @@
-import { memo, useState, useRef } from 'react';
+import { memo, useState, useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { markNotificationAsRead } from '../../features/notifications/notificationsSlice';
 import { getFilteredNotifications } from '../../features/selectors/notificationSelector';
@@ -25,13 +25,13 @@ const Notifications = memo(function Notifications() {
         dispatch(markNotificationAsRead(id));
     };
 
-    const handleSetFilterUrgent = () => {
-        setCurrentFilter('urgent');
-    };
-
-    const handleSetFilterDefault = () => {
-        setCurrentFilter('default');
-    };
+    const handleSetFilterUrgent = useCallback(() => {
+        setCurrentFilter(prev => prev === 'urgent' ? 'all' : 'urgent');
+      }, []);
+    
+      const handleSetFilterDefault = useCallback(() => {
+        setCurrentFilter(prev => prev === 'default' ? 'all' : 'default');
+      }, []);
 
     return (
         <>
@@ -52,7 +52,7 @@ const Notifications = memo(function Notifications() {
                                 ‼️
                             </button>
                             <button onClick={handleSetFilterDefault} aria-label="Show Default Notifications">
-                                ??
+                                ?
                             </button>
                         </div>
 
