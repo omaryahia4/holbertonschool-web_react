@@ -38,7 +38,7 @@ const Notifications = memo(function Notifications() {
             <div className="notification-title" onClick={handleToggleDrawer}>
                 Your notifications
             </div>
-            <div className="Notifications" ref={notificationsContainerRef}>
+            <div className="Notifications visible" ref={notificationsContainerRef}>
                 {loading ? (
                     <p>Loading...</p>
                 ) : filteredNotifications.length > 0 ? (
