@@ -4,44 +4,66 @@ import CourseListRow from './CourseListRow/CourseListRow';
 import WithLogging from '../../components/HOC/WithLogging';
 
 const styles = StyleSheet.create({
-  table: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    border: 'groove',
+  courseList: {
+    border: '1px solid black',
+    borderCollapse: 'collapse',
     width: '100%',
   },
   th: {
-    borderBottom: '1px rgb(178, 178, 178) solid',
+    border: '1px solid black',
     textAlign: 'left',
+    padding: '8px',
   },
-  tableTitleTh: {
+  td: {
+    border: '1px solid black',
+    textAlign: 'left',
+    padding: '8px',
+  },
+  tableTitle: {
     textAlign: 'center',
   },
 });
 
 export const CourseList = ({ courses = [] }) => {
   return (
-    <table id="CourseList" className={css(styles.table)}>
-      {courses.length > 0 ? (
-        <>
-          <thead className={css(styles.tableTitleTh)}>
-            <CourseListRow textFirstCell="Available courses" isHeader={true} />
-            <CourseListRow textFirstCell="Course name" textSecondCell="Credit" isHeader={true} />
-          </thead>
-          <tbody>
-            {courses.map((course) => (
-              <CourseListRow
-                key={course.id}
-                textFirstCell={course.name}
-                textSecondCell={course.credit}
-              />
-            ))}
-          </tbody>
-        </>
-      ) : (
-        <thead className={css(styles.tableTitleTh)}>
-          <CourseListRow textFirstCell="No course available yet" isHeader={true} />
-        </thead>
+    <table id="CourseList" className={css(styles.courseList)}>
+      <thead>
+        {courses.length > 0 ? (
+          <>
+            <CourseListRow
+              isHeader={true}
+              textFirstCell="Available courses"
+              className={css(styles.th, styles.tableTitle)}
+              colSpan={2}
+            />
+            <CourseListRow
+              isHeader={true}
+              textFirstCell="Course name"
+              textSecondCell="Credit"
+              className={css(styles.th)}
+            />
+          </>
+        ) : (
+          <CourseListRow
+            isHeader={true}
+            textFirstCell="No course available yet"
+            className={css(styles.th, styles.tableTitle)}
+            colSpan={2}
+          />
+        )}
+      </thead>
+      {courses.length > 0 && (
+        <tbody>
+          {courses.map((course) => (
+            <CourseListRow
+              key={course.id}
+              textFirstCell={course.name}
+              textSecondCell={course.credit}
+              isHeader={false}
+              className={css(styles.td)}
+            />
+          ))}
+        </tbody>
       )}
     </table>
   );

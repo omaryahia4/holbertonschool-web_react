@@ -1,21 +1,21 @@
 import React from 'react'
 
-const CourseListRow = ({ isHeader = false, textFirstCell = '', textSecondCell = null }) => {
+const CourseListRow = ({ isHeader = false, textFirstCell = '', textSecondCell = null, className = '', }) => {
     return (
       <tr>
         {isHeader ? (
           textSecondCell === null ? (
-            <th colSpan="2">{textFirstCell}</th>
+            <th className={className} colSpan="2">{textFirstCell}</th>
           ) : (
             <>
-              <th>{textFirstCell}</th>
-              <th>{textSecondCell}</th>
+              <th className={className}>{textFirstCell}</th>
+              <th className={className}>{textSecondCell}</th>
             </>
           )
         ) : (
           <>
-            <td>{textFirstCell}</td>
-            <td>{textSecondCell}</td>
+            <td className={className}>{textFirstCell}</td>
+            <td className={className}>{textSecondCell}</td>
           </>
         )}
       </tr>
