@@ -25,7 +25,7 @@ const Header = ({ user, logOut }) => {
       <h1>School dashboard</h1>
       {user.isLoggedIn && (
         <div className={css(styles.logoutSection)} id="logoutSection">
-          Welcome <b>{user.email}</b> (<a href="" onClick={logOut}>logout</a>)
+          Welcome <b>{user.email}</b> (<a href="#" onClick={logOut}>logout</a>)
         </div>
       )}
     </div>
