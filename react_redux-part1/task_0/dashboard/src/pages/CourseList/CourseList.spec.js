@@ -1,5 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import CourseList from './CourseList';
+import { StyleSheetTestUtils } from "aphrodite";
+
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
+
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
 test('Should render the CourseList component without crashing', () => {
     const props = {

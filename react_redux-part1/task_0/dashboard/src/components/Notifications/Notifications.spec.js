@@ -1,6 +1,15 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { getLatestNotification } from '../../utils/utils'
 import Notifications from './Notifications';
+import { StyleSheetTestUtils } from "aphrodite";
+
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
+
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
 test('Should display a title, button and a 3 list items, whenever the "displayDrawer" set to true', () => {
     const props = {
