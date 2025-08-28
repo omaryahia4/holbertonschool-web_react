@@ -4,6 +4,7 @@ export default function CourseListRow({
     textSecondCell = null
 }) {
     return (
+        <tr className={isHeader ? "bg-[color:theme(--color-table-header)]/45" : "bg-[color:theme(--color-table-rows)]/66"}>
         isHeader ? (
             <tr>
                 <th colSpan={textSecondCell ? 1 : 2}>{textFirstCell}</th>
@@ -15,5 +16,6 @@ export default function CourseListRow({
                 <td>{textSecondCell}</td>
             </tr>
         )
+        </tr>
     )
 }
