@@ -1,6 +1,7 @@
 import CourseListRow from './CourseListRow';
+import WithLogging from '../HOC/WithLogging';
 
-export default function CourseList({ courses = [] }) {
+function CourseList({ courses = [] }) {
     return (
         <div className='w-4/5 max-w-[90%] mx-auto my-8'>
             {
@@ -44,3 +45,6 @@ export default function CourseList({ courses = [] }) {
         </div>
     );
 }
+
+const CourseListWithLogging = WithLogging(CourseList);
+export default CourseListWithLogging
