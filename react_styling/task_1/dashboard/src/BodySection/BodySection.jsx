@@ -7,5 +7,4 @@ function BodySection({ title, children }) {
     );
 }
 
-
 export default BodySection;

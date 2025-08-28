@@ -1,13 +1,12 @@
 import CourseListRow from './CourseListRow';
-import './CourseList.css'
 
 export default function CourseList({ courses = [] }) {
     return (
-        <div className='courses'>
+        <div className='w-4/5 max-w-[90%] mx-auto my-8'>
             {
                 courses.length > 0 ?
                     (
-                        <table id='CourseList'>
+                        <table id='CourseList' className="w-full border-collapse border border-gray-300">
                             <thead>
                                 <CourseListRow
                                     textFirstCell="Available courses"
@@ -32,7 +31,7 @@ export default function CourseList({ courses = [] }) {
                             </tbody>
                         </table>
                     ) : (
-                        <table id='CourseList'>
+                        <table id='CourseList' className='w-full border-collapse border border-gray-300'>
                             <thead>
                                 <CourseListRow
                                     isHeader={true}

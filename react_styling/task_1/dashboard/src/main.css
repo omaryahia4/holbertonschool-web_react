@@ -4,8 +4,41 @@
   --font-roboto: "Roboto", sans-serif; 
 }
 
+:root {
+  --color-table-header: #deb5b5;
+  --color-table-rows: #CDCDCD;
+}
+
 @layer base {
   html {
     font-family: var(--font-roboto);
   }
+}
+
+
+#CourseList th {
+  background-color: var(--color-table-header);
+  opacity: 0.66;
+  border: 1px solid rgb(156 163 175);
+  padding-left: 8px;
+  text-align: left; 
+}
+
+
+#CourseList td {
+  background-color: var(--color-table-rows);
+  opacity: 0.45;
+  border: 1px solid rgb(156 163 175);
+  padding-left: 8px;
+}
+
+
+.courses {
+  width: 85%;
+  margin: 2rem auto; 
+}
+
+.courses table {
+  width: 100%;
+  border-collapse: collapse
 }
