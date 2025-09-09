@@ -26,7 +26,7 @@ class Notifications extends Component {
                 <div className="absolute top-0 right-2">Your notifications</div>
                 {
                     displayDrawer ? (
-                        <div className="w-90 absolute right-2 mt-8 border-2 border-dashed p-4" style={{ borderColor: "var(--main-color)" }}>
+                        <div className="w-120 absolute right-2 mt-8 border-2 border-dashed p-4" style={{ borderColor: "var(--main-color)" }}>
                             {notifications.length > 0 ? (
                                 <>
                                     <p>Here is the list of notifications</p>
