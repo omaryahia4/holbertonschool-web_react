@@ -7,7 +7,7 @@ function CourseList({ courses = [] }) {
             {
                 courses.length > 0 ?
                     (
-                        <table id='CourseList' className="w-full border-collapse border border-gray-300">
+                        <table id='CourseList' className="w-4/5 max-w-[90%] min-w-[80%] mx-auto my-8 border-collapse border border-gray-300">
                             <thead>
                                 <CourseListRow
                                     textFirstCell="Available courses"
