@@ -3,7 +3,7 @@ import WithLogging from '../HOC/WithLogging';
 
 function CourseList({ courses = [] }) {
     return (
-        <div className='w-4/5 lg:w-[85%] xl:w-[90%] mx-auto my-8'>
+        <div className='w-4/5 min-w-80 mx-auto my-8'>
             {
                 courses.length > 0 ?
                     (
