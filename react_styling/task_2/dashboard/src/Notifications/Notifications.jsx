@@ -23,20 +23,15 @@ class Notifications extends Component {
         const { notifications = [], displayDrawer = true } = this.props;
         return (
             <div>
-                <div className="absolute top-0 right-2">Your notifications</div>
+                <div className="absolute top-1 right-2">Your notifications</div>
                 {
                     displayDrawer ? (
-                        <div className="w-120 absolute right-2 mt-8 border-2 border-dashed p-4" style={{ borderColor: "var(--main-color)" }}>
+                        <div className="flex flex-row justify-between w-120 absolute right-2 mt-8 border-2 border-dashed p-1" style={{ borderColor: "var(--main-color)" }}>
                             {notifications.length > 0 ? (
                                 <>
-                                    <p>Here is the list of notifications</p>
-                                    <button
-                                        onClick={() => console.log('Close button has been clicked')}
-                                        aria-label='Close'
-                                    >
-                                        <img className='size-3 absolute top-5 right-2' src={closeIcon} alt='close icon' />
-                                    </button>
-                                    <ul>
+                                <div className='flex flex-col'>
+                                    <p>Here is the list of notifications</p>  
+                                    <ul className='list-disc list-inside'>
                                         {notifications.map((notification, index) => (
                                             <NotificationItem
                                                 id={index}
@@ -48,6 +43,12 @@ class Notifications extends Component {
                                             />
                                         ))}
                                     </ul>
+                                </div>
+                                <div className='size-3'>
+                                    <button onClick={() => console.log('Close button has been clicked')}aria-label='Close'>
+                                        <img  src={closeIcon} alt='close icon' />
+                                    </button>
+                                </div>
                                 </>
                             ) : (
                                 <p>No new notification for now</p>
