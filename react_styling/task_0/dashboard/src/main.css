@@ -1,11 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  --font-roboto: "Roboto", system-ui, sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+  --color-table-header: #deb5b5;
+  --color-table-rows: #CDCDCD;
 }
 
 @layer base {
   html {
     font-family: var(--font-roboto);
   }
+}
+
+tr.header-row {
+  background-color: var(--color-table-header);
+  opacity: 0.66;
+}
+
+tr.data-row {
+  background-color: var(--color-table-rows);
+  opacity: 0.45;
+}
+
+td, th {
+  border: 1px solid #9ca3af;
+  padding-left: 8px;
 }

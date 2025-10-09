@@ -12,7 +12,7 @@ import BodySection from '../BodySection/BodySection';
 const notificationsList = [
   { id: 1, type: 'default', value: 'New course available' },
   { id: 2, type: 'urgent', value: 'New resume available' },
-  { id: 3, type: 'urgent', html: { __html: getLatestNotification()} }
+  { id: 3, type: 'urgent', html: { __html: getLatestNotification() } }
 ];
 
 const coursesList = [
@@ -29,13 +29,13 @@ class App extends Component {
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeydown);
   }
-  
+
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleKeydown);
   }
 
   handleKeydown = (e) => {
-    if (e.ctrlKey && e.key === "h" ) {
+    if (e.ctrlKey && e.key === "h") {
       alert("Logging you out");
       if (this.props.logOut) {
         this.props.logOut();
@@ -44,11 +44,9 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedIn = false, logOut = () => {} } = this.props;
-
-
+    const { isLoggedIn = false, logOut = () => {}  } = this.props;
     return (
-      <div className='App'>
+      <>
         <Notifications notifications={notificationsList} />
         <>
           <Header />
@@ -61,16 +59,13 @@ class App extends Component {
               <BodySectionWithMarginBottom title='Course list'>
                 <CourseList courses={coursesList} />
               </BodySectionWithMarginBottom>
-            )
-          }
+            )}
           <BodySection title="News from the School">
-            <p>
-              Holberton School news goes here
-            </p>
+            <p>Holberton School News goes here</p>
           </BodySection>
         </>
         <Footer />
-      </div>
+      </>
     );
   }
 }

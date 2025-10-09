@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import './App.css';
 import Notifications from '../Notifications/Notifications';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
@@ -11,7 +12,7 @@ import BodySection from '../BodySection/BodySection';
 const notificationsList = [
   { id: 1, type: 'default', value: 'New course available' },
   { id: 2, type: 'urgent', value: 'New resume available' },
-  { id: 3, type: 'urgent', html: { __html: getLatestNotification()} }
+  { id: 3, type: 'urgent', html: { __html: getLatestNotification() } }
 ];
 
 const coursesList = [
@@ -20,7 +21,7 @@ const coursesList = [
   { id: 3, name: 'React', credit: 40 }
 ];
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
   }
@@ -28,13 +29,13 @@ export default class App extends Component {
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeydown);
   }
-  
+
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleKeydown);
   }
 
   handleKeydown = (e) => {
-    if (e.ctrlKey && e.key === "h" ) {
+    if (e.ctrlKey && e.key === "h") {
       alert("Logging you out");
       if (this.props.logOut) {
         this.props.logOut();
@@ -43,12 +44,11 @@ export default class App extends Component {
   }
 
   render() {
-    const { isLoggedIn = false, logOut = () => {} } = this.props;
-
+    const { isLoggedIn = true, logOut = () => {}  } = this.props;
     return (
-      <div className="relative px-3">
+      <>
         <Notifications notifications={notificationsList} />
-        <div className="h-[95vh]">
+        <>
           <Header />
           {
             !isLoggedIn ? (
@@ -59,16 +59,15 @@ export default class App extends Component {
               <BodySectionWithMarginBottom title='Course list'>
                 <CourseList courses={coursesList} />
               </BodySectionWithMarginBottom>
-            )
-          }
+            )}
           <BodySection title="News from the School">
-            <p>
-              ipsum Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique, asperiores architecto blanditiis fuga doloribus sit illum aliquid ea distinctio minus accusantium, impedit quo voluptatibus ut magni dicta. Recusandae, quia dicta?
-            </p>
+            <p>Holberton School News goes here</p>
           </BodySection>
-        </div>
-        <Footer className="fixed bottom-0" />
-      </div>
+        </>
+        <Footer />
+      </>
     );
   }
 }
+
+export default App;
