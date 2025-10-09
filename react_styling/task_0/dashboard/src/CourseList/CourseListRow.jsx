@@ -1,3 +1,4 @@
+import '../main.css';
 
 export default function CourseListRow({
     isHeader = false,
@@ -6,12 +7,12 @@ export default function CourseListRow({
 }) {
     return (
         isHeader ? (
-            <tr>
+            <tr className="header-row">
                 <th colSpan={textSecondCell ? 1 : 2}>{textFirstCell}</th>
                 {textSecondCell ? <th>{textSecondCell}</th> : null}
             </tr>
         ) : (
-            <tr>
+            <tr className="data-row">
                 <td>{textFirstCell}</td>
                 <td>{textSecondCell}</td>
             </tr>
